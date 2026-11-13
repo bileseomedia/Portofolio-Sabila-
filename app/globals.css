@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #fffcf8;
+  --ink: #2e2b33;
+  --muted: #6b6570;
+}
+
+* { -webkit-tap-highlight-color: transparent; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection { background: #f9dfe8; color: #2e2b33; }
+
+.font-serif { font-family: "Cormorant Garamond", serif; }
+
+/* scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #fffcf8; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f9dfe8, #e8dffa);
+  border-radius: 999px;
+}
+
+/* reveal utility for ScrollAnimator */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
+.reveal.in { opacity: 1; transform: none; }
+
+.reveal-scale { opacity: 0; transform: scale(.94); transition: opacity .9s ease, transform .9s cubic-bezier(.22,1,.36,1); }
+.reveal-scale.in { opacity: 1; transform: none; }
+
+/* decorative blob */
+.blob {
+  filter: blur(0px);
+  animation: blobMorph 12s ease-in-out infinite;
+}
+@keyframes blobMorph {
+  0%,100% { border-radius: 62% 38% 46% 54% / 55% 45% 55% 45%; transform: rotate(0deg); }
+  50% { border-radius: 40% 60% 58% 42% / 45% 60% 40% 55%; transform: rotate(6deg); }
+}
+
+/* grain texture overlay */
+.grain::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(46,43,51,.05) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: .35;
+}
+
+/* hover lift */
+.lift { transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s; }
+.lift:hover { transform: translateY(-6px); box-shadow: 0 24px 60px -24px rgba(46,43,51,.18); }
